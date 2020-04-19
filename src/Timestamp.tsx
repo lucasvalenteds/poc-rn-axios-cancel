@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Axios, { AxiosInstance, CancelTokenSource } from 'axios';
 
 export interface TimestampService {
@@ -6,11 +6,12 @@ export interface TimestampService {
 }
 
 export class TimestampServiceHttpbin implements TimestampService {
-  private delayInSeconds = 2;
+  public constructor(
+    private httpClient: AxiosInstance,
+    private delayInSeconds: number = 2,
+  ) {}
 
-  constructor(private httpClient: AxiosInstance) {}
-
-  async getCurrent(cancelToken: CancelTokenSource): Promise<string> {
+  public async getCurrent(cancelToken: CancelTokenSource): Promise<string> {
     await this.httpClient.get(`/delay/${this.delayInSeconds}`, {
       cancelToken: cancelToken.token,
     });
