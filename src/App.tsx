@@ -7,11 +7,11 @@ import {
   Text,
 } from 'react-native';
 import Axios from 'axios';
-import { TimestampService, useTimestamp } from './Timestamp';
+import { useTimestamp, TimestampServiceHttpbin } from './Timestamp';
 
 const App: React.FC = (): React.ReactElement => {
   const timestamp = useTimestamp(
-    new TimestampService(
+    new TimestampServiceHttpbin(
       Axios.create({
         baseURL: 'https://httpbin.org/',
       }),
